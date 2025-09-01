@@ -42,7 +42,7 @@
             {{ $question->description }}   
         </p>
 
-        <!-- Comments -->      
+        <x-forum.layouts.comment :param="$question" /> 
     </div>
     
     <ul class="space-y-4">
@@ -61,7 +61,7 @@
                         {{ $answer->user->name }} | {{ $answer->created_at->diffForHumans() }}
                     </p>
                     
-                    <!-- Comments -->
+                    <x-forum.layouts.comment :param="$answer" />
                 </div>
             </div>  
         </li>
