@@ -42,7 +42,7 @@
             {{ $question->description }}   
         </p>
 
-        <x-forum.layouts.comment :param="$question" /> 
+        <livewire:comment :commentable="$question" />
     </div>
     
     <ul class="space-y-4">
@@ -61,7 +61,7 @@
                         {{ $answer->user->name }} | {{ $answer->created_at->diffForHumans() }}
                     </p>
                     
-                    <x-forum.layouts.comment :param="$answer" />
+                    <livewire:comment :commentable="$answer" />
                 </div>
             </div>  
         </li>
