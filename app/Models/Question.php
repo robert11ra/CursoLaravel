@@ -10,6 +10,10 @@ class Question extends Model
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+    ];
+
     public function answers()
     {
         return $this->hasMany(Answer::class);
@@ -28,5 +32,27 @@ class Question extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function hearts()
+    {
+        return $this->morphMany(Heart::class, 'heartable');
+    }
+
+    public function isHearted()
+    {
+        return $this->hearts()->where('user_id', 1)->exists();
+    }
+
+    public function heart()
+    {
+        $this->hearts()->create([
+            'user_id' => 1,
+        ]);
+    }
+
+    public function unheart()
+    {
+        $this->hearts()->where('user_id', 1)->delete();
     }
 }
