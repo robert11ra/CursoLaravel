@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasHeart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
-    use HasFactory;
+    use HasFactory, HasHeart;
 
     protected $fillable = [
         'user_id',
@@ -34,25 +35,4 @@ class Question extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function hearts()
-    {
-        return $this->morphMany(Heart::class, 'heartable');
-    }
-
-    public function isHearted()
-    {
-        return $this->hearts()->where('user_id', 1)->exists();
-    }
-
-    public function heart()
-    {
-        $this->hearts()->create([
-            'user_id' => 1,
-        ]);
-    }
-
-    public function unheart()
-    {
-        $this->hearts()->where('user_id', 1)->delete();
-    }
 }
