@@ -9,14 +9,20 @@ use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
     public function show(Question $question)
-    //public function show()
     {
         $question->load('answers','category', 'user');
-        //$question = Question::with('answers','category', 'user')->findOrFail(request()->question);
 
 
         return view('questions.show', [
             'question' => $question
         ]);
+
+    }
+
+    public function destroy(Question $question)
+    {
+        $question->delete();
+
+        return redirect()->route('home');
     }
 }
