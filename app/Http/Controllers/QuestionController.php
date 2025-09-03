@@ -38,7 +38,7 @@ class QuestionController extends Controller
         ]);
 
         $question = Question::create([
-            'user_id' => auth()->id,
+            'user_id' => auth()->id(),
             'category_id' => $request->category_id,
             'title' => $request->title,
             'description' => $request->description,
@@ -104,6 +104,7 @@ class QuestionController extends Controller
 
     public function destroy(Question $question)
     {
+
         $question->delete();
 
         return redirect()->route('home');
