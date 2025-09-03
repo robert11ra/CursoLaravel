@@ -15,7 +15,7 @@ class QuestionController extends Controller
 
     public function index()
     {
-        $questions = Question::with(['user', 'category'])
+        $questions = Question::with('category', 'user')
             ->latest()
             ->paginate(10);
 
